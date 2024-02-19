@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./RegistrationForm.css"; // Import CSS file for styling
+import "./RegistrationForm.css"; 
 
 function RegistrationForm() {
     const [formData, setFormData] = useState({
@@ -16,7 +16,7 @@ function RegistrationForm() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData); // Log form data for now, replace with actual submission logic
+        console.log(formData);
         // Reset form fields after submission
         setFormData({
             name: "",
