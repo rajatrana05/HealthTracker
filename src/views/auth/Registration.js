@@ -1,13 +1,44 @@
 import React, { useState } from "react";
-import "./RegistrationForm.css"; 
+import { useNavigate, Link } from "react-router-dom";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import axios from "axios";
+import "./RegistrationForm.css";
 
 function RegistrationForm() {
+    const history = useNavigate();
+
     const [formData, setFormData] = useState({
         name: "",
         email: "",
         password: "",
         confirmPassword: "",
     });
+
+    const [email, setEmail] = useState("");
+    const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
+
+    async function submit(e) {
+        e.preventDefault();
+        try {
+            await axios
+                .post("http://localhost:8000/registration", { name, email, password })
+                .then((res) => {
+                    console.log(res);
+                    if (res.data == "exist") {
+                        alert("User Already Exists");
+                    } else if (res.data == "notexist") {
+                        history("/home", { state: { id: email } });
+                    }
+                })
+                .catch((e) => {
+                    alert("wrong credentials");
+                    console.log(e);
+                });
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,8 +78,12 @@ function RegistrationForm() {
                         type="email"
                         id="email"
                         name="email"
-                        value={formData.email}
-                        onChange={handleChange}
+                        // value={formData.email}
+                        placeholder="Enter Your Email"
+                        onChange={(e) => {
+                            setEmail(e.target.value);
+                        }}
+                        // onChange={handleChange}
                         required
                     />
                 </div>
@@ -58,8 +93,12 @@ function RegistrationForm() {
                         type="password"
                         id="password"
                         name="password"
-                        value={formData.password}
-                        onChange={handleChange}
+                        placeholder="Enter Password"
+                        // value={formData.password}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
+                        // onChange={handleChange}
                         required
                     />
                 </div>
@@ -69,15 +108,27 @@ function RegistrationForm() {
                         type="password"
                         id="confirmPassword"
                         name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
+                        placeholder="Confirm Password"
+                        // value={formData.confirmPassword}
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}
+                        // onChange={handleChange}
                         required
                     />
                 </div>
-                <button type="submit" className="submit-button">
-                    Register
-                </button>
+                <input
+                    type="submit"
+                    value="Register"
+                    onClick={submit}
+                    className="submit-button"
+                />
             </form>
+            <Row className="py-3">
+                <Col>
+                    Existing User? <Link to={"/login"}>Login</Link>
+                </Col>
+            </Row>
         </div>
     );
 }

@@ -1,7 +1,9 @@
 import "./App.css";
 import { Container } from "react-bootstrap";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Registration from "./views/auth/Registration";
+import Login from "./views/auth/Login";
+import Home from  "./views/auth/Home";
 
 function App() {
     return (
@@ -9,12 +11,13 @@ function App() {
             <main className="py-3">
                 <div className="App">
                     <Container>
-                        <Registration></Registration>
                         <Routes>
+                            <Route path="/home" element={<Home />}></Route>
                             <Route
                                 path="/registration"
-                                component={Registration}
+                                element={<Registration />}
                             ></Route>
+                            <Route path="/login" element={<Login />}></Route>
                         </Routes>
                     </Container>
                 </div>
