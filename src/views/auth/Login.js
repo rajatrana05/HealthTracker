@@ -23,7 +23,15 @@ function LoginForm() {
             await axios
                 .post("http://localhost:8000/", { email, password })
                 .then((res) => {
+                    if (!email) {
+                        toast.warning("Email field is required");
+                      }
+                      if (!password) {
+                        toast.warning("Password field is required");
+                      }
                     if(res.data == "exist") {
+                        localStorage.setItem("token", res.data.token);
+                        localStorage.setItem("email", res.data.result.email);
                         history("/home", {state: {id:email}})
                     }
                     else if(res.data == "notexist") {

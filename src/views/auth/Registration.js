@@ -16,25 +16,45 @@ function RegistrationForm() {
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
-    const [password, setPassword] = useState("");
+    const [confPass, setconfPass] = useState("");
+    const [Pass, setPass] = useState("");
 
     async function submit(e) {
         e.preventDefault();
         try {
             await axios
-                .post("http://localhost:8000/registration", { name, email, password })
+                .post("http://localhost:8000/registration", { name, email, Pass, confPass })
                 .then((res) => {
+                    localStorage.setItem("token", res.data.token);
+                    localStorage.setItem("email", res.data.data.email);
                     console.log(res);
                     if (res.data == "exist") {
                         alert("User Already Exists");
                     } else if (res.data == "notexist") {
                         history("/home", { state: { id: email } });
                     }
+                    if (!name) {
+                        alert("Name feild cannot be empty");
+                      }
+                      if (!email) {
+                        alert("Email field is required");
+                      }
+                      if (!Pass) {
+                        alert("Password field is required");
+                      }
+                      if (!confPass) {
+                        alert("Confirm password field is required");
+                      }
+                      if (!(confPass === Pass)) {
+                        alert("Confirm password and Password field are not equal");
+                      }
                 })
                 .catch((e) => {
                     alert("wrong credentials");
                     console.log(e);
-                });
+                }
+                );
+            
         } catch (e) {
             console.log(e);
         }
@@ -96,7 +116,7 @@ function RegistrationForm() {
                         placeholder="Enter Password"
                         // value={formData.password}
                         onChange={(e) => {
-                            setPassword(e.target.value);
+                            setPass(e.target.value);
                         }}
                         // onChange={handleChange}
                         required
@@ -111,7 +131,7 @@ function RegistrationForm() {
                         placeholder="Confirm Password"
                         // value={formData.confirmPassword}
                         onChange={(e) => {
-                            setPassword(e.target.value);
+                            setconfPass(e.target.value);
                         }}
                         // onChange={handleChange}
                         required
