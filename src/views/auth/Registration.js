@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
 import "./RegistrationForm.css";
+import { toast } from "react-toastify";
 
 function RegistrationForm() {
     const history = useNavigate();
@@ -22,40 +23,63 @@ function RegistrationForm() {
     async function submit(e) {
         e.preventDefault();
         try {
-            await axios
+        if(name || email || Pass || confPass)
+        {
+            console.log("28");
+            var validate= true;
+            /*if(!name)
+            {
+                validate= false;
+                toast.warning("Name field is required");
+                console.log("34");
+            }*/
+            if(!email)
+            {
+                validate= false;
+                toast.warning("Email field is required");
+            }
+            if(!Pass)
+            {
+                validate= false;
+                toast.warning("Password field is required");
+            }
+            if(!confPass)
+            {
+                validate= false;
+                toast.warning("Confirm Password field is required");
+            }
+            if(Pass!== confPass)
+            {
+                validate= false;
+                toast.warning("Password and confirm password should match");
+            }
+            console.log("55");
+            if(validate)
+            {
+                await axios
                 .post("http://localhost:8000/registration", { name, email, Pass, confPass })
                 .then((res) => {
-                    localStorage.setItem("token", res.data.token);
-                    localStorage.setItem("email", res.data.data.email);
-                    console.log(res);
                     if (res.data == "exist") {
                         alert("User Already Exists");
                     } else if (res.data == "notexist") {
+                        console.log(res.err);
                         history("/home", { state: { id: email } });
                     }
-                    if (!name) {
-                        alert("Name feild cannot be empty");
-                      }
-                      if (!email) {
-                        alert("Email field is required");
-                      }
-                      if (!Pass) {
-                        alert("Password field is required");
-                      }
-                      if (!confPass) {
-                        alert("Confirm password field is required");
-                      }
-                      if (!(confPass === Pass)) {
-                        alert("Confirm password and Password field are not equal");
-                      }
+                    
                 })
-                .catch((e) => {
+                .catch((err) => {
                     alert("wrong credentials");
-                    console.log(e);
+                    console.log(err.res.data);
                 }
                 );
+            }
+           
             
-        } catch (e) {
+        }
+        else{
+            toast.warning("All fields are required");
+        }
+     } catch (e) {
             console.log(e);
         }
     }
