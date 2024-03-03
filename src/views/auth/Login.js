@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
+import { toast } from "react-toastify";
 import "./Login.css";
 
 function LoginForm() {
@@ -20,23 +21,38 @@ function LoginForm() {
     async function submit(e) {
         e.preventDefault();
         try {
-            
+            if(email || password)
+            {
+            var validate= true;
+            if(!email)
+            {
+                validate= false;
+                toast.warning("Email field is required");
+            }
+            if(!password)
+            {
+                validate= false;
+                toast.warning("Password field is required");
+            }
+            if(validate)
+            {
             await axios
-                .post("http://localhost:8000/", { email, password })
+                .post("http://localhost:8000/login", { email, password })
                 .then((res) => {
-                   
                     if(res.data == "exist") {
                         history("/home", {state: {id:email}})
                     }
                     else if(res.data == "notexist") {
-                        alert("User Not Found!")
+                        toast.warning("User Not Found!")
                     }
                 }).catch(e => {
                     alert("wrong credentials");
                     console.log(e);
                 });
-                
-        } catch (e) {
+            }
+            }else{
+            toast.warning("All fields are required");
+        }} catch (e) {
             console.log(e);
         }
     }

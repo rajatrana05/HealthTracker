@@ -25,18 +25,20 @@ function RegistrationForm() {
         try {
         if(name || email || Pass || confPass)
         {
-            console.log("28");
             var validate= true;
-            /*if(!name)
+            if(!name)
             {
                 validate= false;
                 toast.warning("Name field is required");
-                console.log("34");
-            }*/
+            }
             if(!email)
             {
                 validate= false;
                 toast.warning("Email field is required");
+            }
+            if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)) {
+                validate= false;
+                toast.warning("Please enter a valid email Id");
             }
             if(!Pass)
             {
@@ -51,16 +53,19 @@ function RegistrationForm() {
             if(Pass!== confPass)
             {
                 validate= false;
-                toast.warning("Password and confirm password should match");
+                toast.warning("Password and Confirm password should match");
             }
-            console.log("55");
+            if (!(/^(?=.*[A-Z]).{8,}$/.test(Pass))) {
+                validate= false;
+                toast.warning("Password should have minimum 8 characters and one cap letter");
+            } 
             if(validate)
             {
                 await axios
                 .post("http://localhost:8000/registration", { name, email, Pass, confPass })
                 .then((res) => {
                     if (res.data == "exist") {
-                        alert("User Already Exists");
+                        toast.warning("User Already Exists");
                     } else if (res.data == "notexist") {
                         console.log(res.err);
                         history("/home", { state: { id: email } });
@@ -111,8 +116,12 @@ function RegistrationForm() {
                         type="text"
                         id="name"
                         name="name"
-                        value={formData.name}
-                        onChange={handleChange}
+                        //value={formData.name}
+                        //onChange={handleChange}
+                        placeholder="Enter Your Name"
+                        onChange={(e) => {
+                            setName(e.target.value);
+                        }}
                         required
                     />
                 </div>
