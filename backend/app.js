@@ -42,7 +42,7 @@ app.post("/registration", async(req, res) => {
             } else {
                 res.json("notexist")
                 console.log(data);
-                await collection.create([data])
+                await collection.insertMany([data])
             }
         }
         catch (e){
