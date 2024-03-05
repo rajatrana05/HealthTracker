@@ -107,11 +107,12 @@ function RegistrationForm() {
     };
 
     return (
+        <div className="registration-bckground">
         <div className="registration-form-container">
-            <h2>Registration</h2>
+            <h2 style={{ color: "white" }}>Registration</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label htmlFor="name">Name:</label>
+                    <label style={{ color: "white" }} htmlFor="name">Name:</label>
                     <input
                         type="text"
                         id="name"
@@ -126,7 +127,7 @@ function RegistrationForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="email">Email:</label>
+                    <label style={{ color: "white" }} htmlFor="email">Email:</label>
                     <input
                         type="email"
                         id="email"
@@ -141,7 +142,7 @@ function RegistrationForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">Password:</label>
+                    <label style={{ color: "white" }} htmlFor="password">Password:</label>
                     <input
                         type="password"
                         id="password"
@@ -156,7 +157,7 @@ function RegistrationForm() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="confirmPassword">Confirm Password:</label>
+                    <label style={{ color: "white" }} htmlFor="confirmPassword">Confirm Password:</label>
                     <input
                         type="password"
                         id="confirmPassword"
@@ -170,19 +171,22 @@ function RegistrationForm() {
                         required
                     />
                 </div>
-                <input
+                <input 
                     type="submit"
                     value="Register"
                     onClick={submit}
-                    className="submit-button"
+                    className="reg-submit-button"
                 />
             </form>
+            <br/>
             <Row className="py-3">
-                <Col>
-                    Existing User? <Link to={"/login"}>Login</Link>
+                <Col style={{ color: "white" }}>
+                    Existing User? <Link style={{ color: "white" }} to={"/login"}>Login</Link>
                 </Col>
             </Row>
         </div>
+        </div>
+        
     );
 }
 
