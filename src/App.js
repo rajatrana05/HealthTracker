@@ -1,3 +1,4 @@
+import Navbar from "./views/Navbar"
 import "./App.css";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -13,6 +14,7 @@ function App() {
             <main className="py-3">
                 <div className="App">
                     <Container>
+                        <Navbar/>
                         <Routes>
                             <Route path="/home" element={<Home />}></Route>
                             <Route

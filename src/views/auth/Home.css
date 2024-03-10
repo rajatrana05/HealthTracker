@@ -1,0 +1,85 @@
+body, html {
+    height: 100%;
+    margin: 0;
+  }
+  
+  .patient-portal-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    height: 100%;
+  }
+  
+  .content-container {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h1 {
+    font-size: 36px;
+    color: #333;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #666;
+    font-size: 18px;
+  }
+  
+  nav ul li a:hover {
+    color: #333;
+  }
+  
+  .content {
+    margin-bottom: 30px;
+  }
+  
+  .appointment-item {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .appointment-item p {
+    margin: 0;
+  }
+  
+  .appointment-item p strong {
+    font-weight: bold;
+  }
+  
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+  
+  @media (max-width: 600px) {
+    h1 {
+      font-size: 28px;
+    }
+    nav ul li {
+        display: block;
+        margin: 10px 0;
+      }
+    }

@@ -1,39 +1,42 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import "./Home.css";
 import "./Login.css";
 
 
 class Home extends React.Component {
   render() {
     return (
-      <div className="container">
-        <header className="header">
-          <h1 className="headerText">Patient Portal</h1>
+      <div className="patient-portal-container">
+        <header>
+          <h1>Welcome to Patient Portal</h1>
         </header>
-
-        <div className="content">
-          <h2 className="welcomeText">Welcome, [Patient Name]</h2>
-          <p>This is your personalized patient portal.</p>
-
-          {/* Patient Information */}
-          <div className="infoContainer">
-            <h3 className="sectionTitle">Patient Information</h3>
-            <ul>
-              <li><strong>Name:</strong> [Patient Name]</li>
-              <li><strong>Date of Birth:</strong> [Date of Birth]</li>
-              <li><strong>Address:</strong> [Address]</li>
-              <li><strong>Email:</strong> [Email]</li>
-              <li><strong>Phone:</strong> [Phone]</li>
-              {/* Add more patient information as needed */}
-            </ul>
+        <nav>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Appointments</a></li>
+            <li><a href="#">Medical Records</a></li>
+            <li><a href="#">Billing</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </nav>
+        <section className="content">
+          <h2>Recent Appointments</h2>
+          <div className="appointment-list">
+            <div className="appointment-item">
+              <p>Date: February 28, 2024</p>
+              <p>Doctor: Dr. Smith</p>
+              <p>Reason: Routine Checkup</p>
+            </div>
+            <div className="appointment-item">
+              <p>Date: March 5, 2024</p>
+              <p>Doctor: Dr. Johnson</p>
+              <p>Reason: Follow-up</p>
+            </div>
           </div>
-
-          {/* Logout Button */}
-          <button className="logoutButton">Logout</button>
-        </div>
-
-        <footer className="footer">
-          <p className="footerText">&copy; 2024 Patient Portal. All rights reserved.</p>
+        </section>
+        <footer>
+          <p>&copy; 2024 Patient Portal</p>
         </footer>
       </div>
     );
