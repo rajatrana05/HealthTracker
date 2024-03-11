@@ -1,85 +1,157 @@
-body, html {
+body,
+html {
     height: 100%;
     margin: 0;
-  }
-  
-  .patient-portal-container {
+}
+
+.patient-portal-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 50px;
     height: 100%;
-  }
-  
-  .content-container {
+}
+
+.content-container {
     max-width: 800px;
     width: 100%;
     padding: 20px;
     box-sizing: border-box;
-  }
-  
-  header {
+}
+
+header {
     text-align: center;
     margin-bottom: 20px;
-  }
-  
-  h1 {
+}
+
+h1 {
     font-size: 36px;
     color: #333;
-  }
-  
-  nav ul {
+}
+
+nav ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
     text-align: center;
-  }
-  
-  nav ul li {
+}
+
+nav ul li {
     display: inline;
     margin-right: 20px;
-  }
-  
-  nav ul li a {
+}
+
+nav ul li a {
     text-decoration: none;
     color: #666;
     font-size: 18px;
-  }
-  
-  nav ul li a:hover {
+}
+
+nav ul li a:hover {
     color: #333;
-  }
-  
-  .content {
+}
+
+.content {
     margin-bottom: 30px;
-  }
-  
-  .appointment-item {
+}
+
+.appointment-item {
     border: 1px solid #ccc;
     padding: 15px;
     margin-bottom: 20px;
-  }
-  
-  .appointment-item p {
+}
+
+.appointment-item p {
     margin: 0;
-  }
-  
-  .appointment-item p strong {
+}
+
+.appointment-item p strong {
     font-weight: bold;
-  }
-  
-  footer {
+}
+
+footer {
     text-align: center;
     margin-top: 20px;
     color: #666;
-  }
-  
-  @media (max-width: 600px) {
+}
+
+@media (max-width: 600px) {
     h1 {
-      font-size: 28px;
+        font-size: 28px;
     }
     nav ul li {
         display: block;
         margin: 10px 0;
-      }
     }
+}
+
+/* Home.css */
+
+.patient-portal-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.patient-portal-container header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.patient-portal-container nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.patient-portal-container nav ul li {
+    margin-right: 20px;
+}
+
+.patient-portal-container nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.patient-portal-container nav ul li a:hover {
+    color: #007bff; /* Blue on hover */
+}
+
+.patient-portal-container .content {
+    margin-top: 20px;
+}
+
+.patient-portal-container .content h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.patient-portal-container .appointment-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.patient-portal-container .appointment-item {
+    width: 300px;
+    padding: 10px;
+    margin: 10px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.patient-portal-container .appointment-item p {
+    margin: 5px 0;
+}
+
+.patient-portal-container footer {
+    text-align: center;
+    margin-top: 20px;
+}
