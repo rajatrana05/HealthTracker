@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../Images/doctor_appoinment.jpg"); /* Background image URL */
+    background-image: url("./../Images/doctor_appoinment.jpg"); /* Background image URL */
     background-size: cover;
     background-position: center;
     height: 100vh;

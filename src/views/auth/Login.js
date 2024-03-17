@@ -39,6 +39,7 @@ function LoginForm() {
                         .then((res) => {
                             if (res.data == "exist") {
                                 history("/home", { state: { id: email } });
+                                toast.success("User is successfully logged in!");
                             } else if (res.data == "notexist") {
                                 toast.warning("User Not Found!");
                             }
