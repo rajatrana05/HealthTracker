@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./Home.css";
-import "./Login.css";
+import "./auth/Login.css";
+import Navbar from './Navbar';
 
 
 class Home extends React.Component {
   render() {
     return (
+      <div>
+        <Navbar/>
       <div className="patient-portal-container">
         <header>
           <h1>Welcome to Patient Portal</h1>
@@ -40,6 +43,7 @@ class Home extends React.Component {
         {/* <footer>
           <p>&copy; 2024 Patient Portal</p>
         </footer> */}
+      </div>
       </div>
     );
   }
