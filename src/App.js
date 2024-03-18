@@ -1,5 +1,6 @@
 import Navbar from "./views/Navbar"
 import "./App.css";
+import { AuthProvider } from "./AuthContext";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Registration from "./views/auth/Registration";
@@ -12,6 +13,7 @@ import AppointmentForm from "./views/auth/Appoinments";
 function App() {
     return (
         <Router>
+        <AuthProvider>
             <main className="py-3">
                 <div className="App">
                     <Container>
@@ -29,6 +31,7 @@ function App() {
                     <ToastContainer />
                 </div>
             </main>
+            </AuthProvider>
         </Router>
     );
 }
