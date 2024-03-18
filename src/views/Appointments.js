@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
-import "./Appoinments.css";
+import "./Appointments.css";
+import { toast } from "react-toastify";
 
 const AppointmentForm = () => {
     const [date, setDate] = useState("");
@@ -9,22 +10,24 @@ const AppointmentForm = () => {
     const [doctor, setDoctor] = useState("");
     const [reason, setReason] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [data, setData] = useState([]);
+    const [selectedDoctor, setSelectedDoctor] = useState("");
 
     async function submit(event) {
         event.preventDefault();
         try {
             await axios
-                .post("http://localhost:8000/appoinments", {
+                .post("http://localhost:8000/bookAppointment", {
                     date,
                     time,
-                    doctor,
+                    selectedDoctor,
                     phoneNumber,
                     reason,
                 })
                 .then((res) => {
                     if (res) {
-                        alert("Appointment created successfully");
-                        setDoctor("");
+                        toast.success("Your appointment has been booked succesfully!")
+                        setSelectedDoctor("");
                         setReason("");
                         setTime("");
                         setDate("");
@@ -40,6 +43,26 @@ const AppointmentForm = () => {
             alert("Failed to create appointment");
         }
     };
+
+    useEffect(() => {
+        fetchData();
+      }, []);
+
+    const fetchData = async () => {
+        try {
+          const response = await axios.get('http://localhost:8000/getDocList');
+          console.log(response);
+          setData(response.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      };
+
+      const handleChange = (event) => {
+        setSelectedDoctor(event.target.value);
+        const selectedItem = data.find(item => item.name === event.target.value);
+        console.log("Selected Doctor ID:", selectedItem._id); 
+      };
 
     const handleSubmit={
 
@@ -71,14 +94,16 @@ const AppointmentForm = () => {
 
                 <label htmlFor="doctor">Doctor:</label>
                 <select
-                    id="doctor"
-                    value={doctor}
-                    onChange={(e) => setDoctor(e.target.value)}
-                    required
+                   value={selectedDoctor} onChange={handleChange}
                 >
                     <option value="">Select a doctor</option>
-                    <option value="Dr. Smith">Dr. Smith</option>
-                    <option value="Dr. Johnson">Dr. Johnson</option>
+                    {/*<option value="Dr. Smith">Dr. Smith</option>
+                    <option value="Dr. Johnson">Dr. Johnson</option>*/}
+                    {data.map((item) => (
+                <option 
+                key={item._id} 
+                value={item.name}>{item.name}</option>
+                 ))}
                 </select>
 
                 <label htmlFor="phoneNumber">Phone Number:</label>

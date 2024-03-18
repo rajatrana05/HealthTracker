@@ -13,12 +13,17 @@ function RegistrationForm() {
         email: "",
         password: "",
         confirmPassword: "",
+        isadmin: false,
+        isDoc: false,
     });
 
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
     const [confPass, setconfPass] = useState("");
     const [Pass, setPass] = useState("");
+    const [isAdmin, setAdmin] = useState("");
+    const [isDoc, setDoc] = useState("");
+
 
     async function submit(e) {
         e.preventDefault();
@@ -62,13 +67,13 @@ function RegistrationForm() {
             if(validate)
             {
                 await axios
-                .post("http://localhost:8000/registration", { name, email, Pass, confPass })
+                .post("http://localhost:8000/registration", { name, email, Pass, confPass, isAdmin, isDoc })
                 .then((res) => {
                     if (res.data == "exist") {
                         toast.warning("User Already Exists");
                     } else if (res.data == "notexist") {
-                        console.log(res.err);
                         history("/home", { state: { id: email } });
+                        toast.success("User is successfully registered and logged in!")
                     }
                     
                 })
