@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useAuth } from "../../AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import axios from "axios";
@@ -6,16 +7,10 @@ import { toast } from "react-toastify";
 import "./Login.css";
 
 function LoginForm() {
-    const history = useNavigate();
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
-
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {login}=useAuth();
 
     async function submit(e) {
         e.preventDefault();
@@ -92,12 +87,9 @@ function LoginForm() {
                             required
                         />
                     </div>
-                    <input
+                    <button
                         type="submit"
-                        value="Login"
-                        onClick={submit}
-                        className="login-submit-button"
-                    />
+                        className="login-submit-button">Login</button>
                 </form>
                 <br />
                 <Row className="py-3">
