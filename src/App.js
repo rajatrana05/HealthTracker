@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Registration from "./views/auth/Registration";
 import Login from "./views/auth/Login";
 import Home from  "./views/Home";
+import Logout from "./views/auth/Logout";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AppointmentForm from "./views/Appointments";
@@ -24,6 +25,7 @@ function App() {
                             ></Route>
                             <Route path="/login" element={<Login />}></Route>
                             <Route path="/appoinments" element={<AppointmentForm />}></Route>
+                            <Route path="/logout" element={<Logout />} />
                         </Routes>
                     </Container>
                     <ToastContainer />
