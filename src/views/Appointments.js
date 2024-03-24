@@ -4,6 +4,8 @@ import axios from "axios";
 import "./Appointments.css";
 import { toast } from "react-toastify";
 
+var docId;
+
 const AppointmentForm = () => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
@@ -13,6 +15,7 @@ const AppointmentForm = () => {
     const [data, setData] = useState([]);
     const [selectedDoctor, setSelectedDoctor] = useState("");
 
+ const patientId = localStorage.getItem('patId');
     async function submit(event) {
         event.preventDefault();
         try {
@@ -21,6 +24,8 @@ const AppointmentForm = () => {
                     date,
                     time,
                     selectedDoctor,
+                    patientId,
+                    docId,
                     phoneNumber,
                     reason,
                 })
@@ -62,6 +67,8 @@ const AppointmentForm = () => {
         setSelectedDoctor(event.target.value);
         const selectedItem = data.find(item => item.name === event.target.value);
         console.log("Selected Doctor ID:", selectedItem._id); 
+        docId= selectedItem._id;
+        console.log(docId);
       };
 
     const handleSubmit={

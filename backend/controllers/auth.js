@@ -17,10 +17,12 @@ authRouter.post("/login", async (req, res) => {
             email: email,
             password: password,
         });
+        console.log(20);
         if (item) {
-            res.json("exist");
+            console.log(item._id);
+            res.json({ status: "success", userId: item._id });
         } else {
-            res.json("notexist");
+            res.json({status: "notexist"});
         }
     } catch (e) {
         res.json("notexist");

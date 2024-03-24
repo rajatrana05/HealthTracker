@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "./Login.css";
 
+
 function LoginForm() {
     const history = useNavigate();
     const [formData, setFormData] = useState({
@@ -31,24 +32,33 @@ function LoginForm() {
                     toast.warning("Password field is required");
                 }
                 if (validate) {
-                    await axios
+                    const response= await axios
                         .post("http://localhost:8000/login", {
                             email,
                             password,
                         })
-                        .then((res) => {
+                        /*.then((res) => {
                             if (res.data == "exist") {
+                                console.log(res);
                                 history("/home", { state: { id: email } });
                                 toast.success("User is successfully logged in!");
                             } else if (res.data == "notexist") {
                                 toast.warning("User Not Found!");
+                            }*/
+                        const { status, userId } = response.data;
+                        if (status === "success") {
+                            history("/home", { state: { id: userId } });
+                            if(userId)
+                            {
+                                
+                                localStorage.setItem('patId', userId);
                             }
-                        })
-                        .catch((e) => {
-                            alert("wrong credentials");
-                            console.log(e);
-                        });
-                }
+                            toast.success("User is successfully logged in!");
+                        } else if (status === "notexist") {
+                            toast.warning("User Not Found!");
+                        }
+                    } 
+                
             } else {
                 toast.warning("All fields are required");
             }

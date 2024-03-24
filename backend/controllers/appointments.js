@@ -38,11 +38,13 @@ console.log("Appointment router working successfully.");
 aptRouter.post("/bookAppointment", async (req, res) => {
     try {
         //const appointment = new Appointment(req.body);
-        const { date, time, selectedDoctor, phoneNumber, reason} = req.body;
+        const { date, time, selectedDoctor,patientId, docId, phoneNumber, reason} = req.body;
         const data = {
             date: date,
             time: time,
             doctor: selectedDoctor,
+            patientId: patientId,
+            docId: docId,
             email: phoneNumber,
             reason: reason
     };
@@ -67,5 +69,21 @@ aptRouter.get('/getDocList', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
       }
   });
+
+
+  aptRouter.post('/getAppointmentList', async (req, res) => {
+    try {
+        console.log(76);
+        const { userId } = req.body;
+        
+        const users = await Appointment.find({ patientId: userId });
+        console.log(users);
+        res.json(users);
+      } catch (error) {
+        console.error('Error fetching appointments:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+      }
+  });
+
 
 module.exports = aptRouter;
