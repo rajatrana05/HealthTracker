@@ -1,6 +1,6 @@
 const express = require("express");
-const user = require("../models/user");
-const Appointment = require("../models/appointments");
+const user = require("../Models/userModel");
+const Appointment = require("../Models/AppointmentsModel");
 const cors = require("cors");
 const app = express();
 app.use(express.json());
@@ -12,28 +12,6 @@ const aptRouter = express.Router();
 console.log("Appointment router working successfully.");
 
 
-/*authRouter.post("/registration", async (req, res) => {
-    const { name, email, Pass, confPass, isAdmin, isDoc } = req.body;
-    const data = {
-        name: name,
-        email: email,
-        password: Pass,
-        isAdmin: false,
-        isDoc: false
-    };
-    try {
-        const item = await user.findOne({ email: email });
-        if (item) {
-            res.json("exist");
-        } else {
-            res.json("notexist");
-            console.log(data);
-            await user.insertMany([data]);
-        }
-    } catch (e) {
-        res.json("notexist");
-    }
-});*/
 
 aptRouter.post("/bookAppointment", async (req, res) => {
     try {
@@ -60,7 +38,8 @@ aptRouter.post("/bookAppointment", async (req, res) => {
 
 aptRouter.get('/getDocList', async (req, res) => {
     try {
-        const users = await user.find({ isDoc: true });
+        const users = await user.find({ isDoctor: true });
+        console.log(users);
         res.json(users);
       } catch (error) {
         console.error('Error fetching users:', error);

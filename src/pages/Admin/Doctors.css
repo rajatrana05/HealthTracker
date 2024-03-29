@@ -1,0 +1,43 @@
+.doctors_container {
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.title {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.doctors-table {
+    margin-bottom: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th,
+.table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.action-btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.action-btn:hover {
+    background-color: #0056b3;
+}
